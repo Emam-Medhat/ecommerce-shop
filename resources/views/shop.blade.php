@@ -462,20 +462,52 @@
         /* ======================== */
         /* PAGINATION */
         /* ======================== */
-        .pagination a {
-            color: #333;
-            border: 1px solid #e0e0e0;
-            margin: 0 3px;
-            padding: 8px 12px;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-top: 30px;
         }
 
-        .pagination a:hover,
-        .pagination a.active {
-            background: #f28b00;
-            color: white;
+        .pagination .page-item {
+            list-style: none;
+        }
+
+        .pagination .page-link {
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #f28b00;
+            color: #fff;
             border-color: #f28b00;
+            transform: translateY(-2px);
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #999;
+            background-color: #f9f9f9;
+            border-color: #e0e0e0;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-item.disabled .page-link:hover {
+            transform: none;
+            background-color: #f9f9f9;
         }
 
         /* ======================== */
@@ -512,20 +544,74 @@
                 margin-bottom: 15px;
             }
         }
-        .pagination .page-item.active .page-link {
-    background-color: #007bff; /* اللون الأزرق */
-    border-color: #007bff;
-    color: #fff; /* نص أبيض */
+
+        .g-4, .gy-4 {
+            display: flex !important;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 1400px) {
+            .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+                max-width: 100% !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                width: 17% !important;
+            }
+
+            .col-lg-4 {
+                flex: 0 0 auto;
+                width: 20% !important;
+            }
+        }
+
+        .btn.btn-primary {
+            position: relative;
+            top: -25px;
+        }
+    </style>
+    <style>
+        .align-items-center {
+    align-items: center !important;
+    justify-content: space-between;
 }
-.pagination .page-link {
-    color: #007bff; /* لون النص لبقية الصفحات */
-}
-.pagination .page-link:hover {
-    background-color: #0056b3; /* لون عند المرور على الصفحة */
-    color: #fff;
+    </style>
+          <style>
+                .pagination {
+    display: flex !important;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-    </style>
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+    pointer-events: none;
+}
+
+              </style>
+
 </head>
 
 <body>
@@ -691,75 +777,76 @@
                         </form>
                     </div>
 
-                    <div class="product-color mb-3">
-                        <h4>Select By Color</h4>
-                        <ul class="list-unstyled">
-                            <li>
-                                <div class="product-color-item">
-                                    <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>Gold</a>
-                                    <span>(1)</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product-color-item">
-                                    <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>Green</a>
-                                    <span>(1)</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product-color-item">
-                                    <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>White</a>
-                                    <span>(1)</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="additional-product mb-4">
-                        <h4>Additional Products</h4>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                            <label for="Categories-1" class="text-dark">Accessories</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                            <label for="Categories-2" class="text-dark">Electronics & Computer</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                            <label for="Categories-3" class="text-dark">Laptops & Desktops</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                            <label for="Categories-4" class="text-dark">Mobiles & Tablets</label>
-                        </div>
-                        <div class="additional-product-item">
-                            <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                            <label for="Categories-5" class="text-dark">SmartPhone & Smart TV</label>
-                        </div>
-                    </div>
-                   
-                    <a href="#">
-                        <div class="position-relative">
-                            <img src="img/product-banner-2.jpg" class="img-fluid w-100 rounded" alt="Image">
-                            <div class="text-center position-absolute d-flex flex-column align-items-center justify-content-center rounded p-4"
-                                style="width: 100%; height: 100%; top: 0; right: 0; background: rgba(242, 139, 0, 0.3);">
-                                <h5 class="display-6 text-primary">SALE</h5>
-                                <h4 class="text-secondary">Get UP To 50% Off</h4>
-                                <a href="#" class="btn btn-primary rounded-pill px-4">Shop Now</a>
-                            </div>
-                        </div>
-                    </a>
-                
-                </div>
+                <div class="product-color mb-3">
+    <h4>{{ __('messages.select_by_color') }}</h4>
+    <ul class="list-unstyled">
+        <li>
+            <div class="product-color-item">
+                <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>{{ __('messages.gold') }}</a>
+                <span>(1)</span>
+            </div>
+        </li>
+        <li>
+            <div class="product-color-item">
+                <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>{{ __('messages.green') }}</a>
+                <span>(1)</span>
+            </div>
+        </li>
+        <li>
+            <div class="product-color-item">
+                <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>{{ __('messages.white') }}</a>
+                <span>(1)</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="additional-product mb-4">
+    <h4>{{ __('messages.additional_products') }}</h4>
+    <div class="additional-product-item">
+        <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
+        <label for="Categories-1" class="text-dark">{{ __('messages.accessories') }}</label>
+    </div>
+    <div class="additional-product-item">
+        <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
+        <label for="Categories-2" class="text-dark">{{ __('messages.electronics_computer') }}</label>
+    </div>
+    <div class="additional-product-item">
+        <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
+        <label for="Categories-3" class="text-dark">{{ __('messages.laptops_desktops') }}</label>
+    </div>
+    <div class="additional-product-item">
+        <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
+        <label for="Categories-4" class="text-dark">{{ __('messages.mobiles_tablets') }}</label>
+    </div>
+    <div class="additional-product-item">
+        <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
+        <label for="Categories-5" class="text-dark">{{ __('messages.smartphone_smart_tv') }}</label>
+    </div>
+</div>
+
+<a href="#">
+    <div class="position-relative">
+        <img src="img/product-banner-2.jpg" class="img-fluid w-100 rounded" alt="Image">
+        <div class="text-center position-absolute d-flex flex-column align-items-center justify-content-center rounded p-4"
+            style="width: 100%; height: 100%; top: 0; right: 0; background: rgba(242, 139, 0, 0.3);">
+            <h5 class="display-6 text-primary">{{ __('messages.sale') }}</h5>
+            <h4 class="text-secondary">{{ __('messages.get_up_to_50_off') }}</h4>
+            <a href="#" class="btn btn-primary rounded-pill px-4">{{ __('messages.shop_now') }}</a>
+        </div>
+    </div>
+</a>
+    </div>
+
                 <div class="col-lg-9 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="rounded mb-4 position-relative">
-                        <img src="img/product-banner-3.jpg" class="img-fluid rounded w-100" style="height: 250px;" alt="Image">
-                        <div class="position-absolute rounded d-flex flex-column align-items-center justify-content-center text-center"
+                        {{-- <img src="img/product-banner-3.jpg" class="img-fluid rounded w-100" style="height: 250px;" alt="Image"> --}}
+                        {{-- <div class="position-absolute rounded d-flex flex-column align-items-center justify-content-center text-center"
                             style="width: 100%; height: 250px; top: 0; left: 0; background: rgba(242, 139, 0, 0.3);">
                             <h4 class="display-5 text-primary">SALE</h4>
                             <h3 class="display-4 text-white mb-4">Get UP To 50% Off</h3>
                             <a href="#" class="btn btn-primary rounded-pill">Shop Now</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row g-4">
                         <div class="col-xl-7">
@@ -815,16 +902,14 @@
                                                         @endif">
                                                         {{ ucfirst($product->condition) }}
                                                     </span>
-                                                 <img 
-    src="{{ 
-        Str::startsWith($product->image, ['http://', 'https://']) 
-            ? $product->image 
-            : asset('storage/' . $product->image) 
-    }}" 
-    class="card-img-top img-fluid" 
-    alt="{{ $product->name }}">
-
-                                                    {{-- <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top img-fluid" alt="{{ $product->name }}"> --}}
+                                                    <img
+                                                        src="{{
+                                                            Str::startsWith($product->image, ['http://', 'https://'])
+                                                                ? $product->image
+                                                                : asset('storage/' . $product->image)
+                                                        }}"
+                                                        class="card-img-top img-fluid"
+                                                        alt="{{ $product->name }}">
                                                     <div class="product-details">
                                                         <a href="#"><i class="fa fa-eye fa-1x"></i></a>
                                                     </div>
@@ -840,7 +925,7 @@
                                             </div>
                                             <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
                                                 <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
-                                                    <i class="fas fa-shopping-cart me-2"></i> Show Product
+                                                    <i class="fas fa-shopping-cart me-2"></i>{{ __('messages.Show_Product') }}
                                                 </a>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex">
@@ -864,64 +949,89 @@
                                     </div>
                                 @endforeach
 
-                                <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div class="pagination d-flex justify-content-center mt-5">
-                                        {{-- {{ $products->links() }} --}}
+<!-- Pagination -->
+<div class="pagination">
+    @if ($products->onFirstPage() === false)
+        <a href="{{ $products->previousPageUrl() }}">&laquo; Previous</a>
+    @endif
+
+    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+        <a href="{{ $url }}" class="{{ $products->currentPage() == $page ? 'active' : '' }}">{{ $page }}</a>
+    @endforeach
+
+    @if ($products->hasMorePages())
+        <a href="{{ $products->nextPageUrl() }}">Next &raquo;</a>
+    @endif
+</div>
+
+                     </div>
+                        </div>
+                        <div id="tab-6" class="products tab-pane fade show p-0">
+                            <div class="row g-4 products-mini">
+
+                                @foreach ($products as $product)
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="products-mini-item border rounded wow fadeInUp" data-wow-delay="0.1s">
+                                            <div class="row g-0">
+                                                <div class="col-5">
+                                                    <img src="{{
+                                                        Str::startsWith($product->image, ['http://', 'https://'])
+                                                            ? $product->image
+                                                            : asset('storage/' . $product->image)
+                                                    }}" class="img-fluid w-100 h-100 rounded-start" alt="{{ $product->name }}">
+                                                </div>
+                                                <div class="col-7">
+                                                    <div class="products-mini-content p-3">
+                                                        <a href="{{ route('products.show', $product->id) }}" class="d-block mb-2 fw-bold">{{ $product->name }}</a>
+                                                        <p class="mb-2 text-muted">SKU: {{ $product->sku ?? 'G2356' }}</p>
+                                                        <p class="mb-0">
+                                                            <del class="me-2 fs-5">${{ $product->price }}</del>
+                                                            <span class="text-primary fs-5">${{ $product->discount_price ?? $product->price }}</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="products-mini-add border-top p-3 d-flex justify-content-between align-items-center">
+                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
+                                                    <i class="fas fa-shopping-cart me-2"></i> show product
+                                                </a>
+                                                <div class="d-flex">
+                                                    <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3">
+                                                        <span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></span>
+                                                    </a>
+                                                    <a href="#" class="text-primary d-flex align-items-center justify-content-center">
+                                                        <span class="rounded-circle btn-sm-square border">
+                                                            <i class="fas fa-heart {{ auth()->check() && auth()->user()->favorites()->where('product_id', $product->id)->exists() ? 'text-danger' : '' }}"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
+                                @endforeach
+<div class="pagination">
+    @if ($products->onFirstPage() === false)
+        <a href="{{ $products->previousPageUrl() }}">&laquo; Previous</a>
+    @endif
+
+    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+        <a href="{{ $url }}" class="{{ $products->currentPage() == $page ? 'active' : '' }}">{{ $page }}</a>
+    @endforeach
+
+    @if ($products->hasMorePages())
+        <a href="{{ $products->nextPageUrl() }}">Next &raquo;</a>
+    @endif
+</div>
+                            </div>
+
+                            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="pagination d-flex justify-content-center mt-5">
+                                    {{-- {{ $products->links() }} --}}
                                 </div>
                             </div>
-                        </div>
-                  <div id="tab-6" class="products tab-pane fade show p-0">
-    <div class="row g-4 products-mini">
-{{-- @for ($i = 0; $i < 20; $i++) --}}
 
-        @foreach ($products as $product)
-            <div class="col-lg-6 mb-4">
-                <div class="products-mini-item border rounded wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="row g-0">
-                        <div class="col-5">
-                            <img src="{{ asset('storage/' . $product->image) }}" class="img-fluid w-100 h-100 rounded-start" alt="{{ $product->name }}">
                         </div>
-                        <div class="col-7">
-                            <div class="products-mini-content p-3">
-                                <a href="{{ route('products.show', $product->id) }}" class="d-block mb-2 fw-bold">{{ $product->name }}</a>
-                                <p class="mb-2 text-muted">SKU: {{ $product->sku ?? 'G2356' }}</p>
-                                <p class="mb-0">
-                                    <del class="me-2 fs-5">${{ $product->price }}</del>
-                                    <span class="text-primary fs-5">${{ $product->discount_price ?? $product->price }}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="products-mini-add border-top p-3 d-flex justify-content-between align-items-center">
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
-                            <i class="fas fa-shopping-cart me-2"></i> Add To Cart
-                        </a>
-                        <div class="d-flex">
-                            <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3">
-                                <span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></span>
-                            </a>
-                            <a href="#" class="text-primary d-flex align-items-center justify-content-center">
-                                <span class="rounded-circle btn-sm-square border">
-                                    <i class="fas fa-heart {{ auth()->check() && auth()->user()->favorites()->where('product_id', $product->id)->exists() ? 'text-danger' : '' }}"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-{{-- @endfor --}}
-
-    </div>
-
-    <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="pagination d-flex justify-content-center mt-5">
-            {{-- {{ $products->links() }} --}}
-        </div>
-    </div>
-
-</div>
 
                     </div>
                 </div>

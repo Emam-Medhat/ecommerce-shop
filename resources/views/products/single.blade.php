@@ -177,7 +177,7 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                                 <div class="flex-grow-1">
                                     <h6 class="mb-2">{{ $featured->name }}</h6>
                                     <div class="d-flex mb-2">
-                                        @for($i = 1; $i <= 5; $i++)<i class="fa fa-star {{ $i <= $featured->rating ? 'text-warning' : 'text-muted' }}"></i>@endfor
+                                     <i class="fa fa-star {{ $i <= $featured->rating ? 'text-warning' : 'text-muted' }}"></i>
                                     </div>
                                     <div class="d-flex">
                                         <h5 class="fw-bold me-2">${{ $featured->discount_price }}</h5>
@@ -295,9 +295,8 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                                 <!-- Rating -->
                                 @php $avgRating = $product->rating ?? 4; @endphp
                                 <div class="d-flex align-items-center mb-4">
-                                    @for($i = 1; $i <= 5; $i++)
-                                        <i class="fa fa-star {{ $i <= $avgRating ? 'text-warning' : 'text-muted' }}"></i>
-                                    @endfor
+                                   
+                                    
                                     <span class="ms-2 text-muted small">({{ $product->reviews_count ?? 12 }} تقييم)</span>
                                 </div>
 
@@ -403,7 +402,7 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                                                 <div class="d-flex justify-content-between mb-2">
                                                     <h6>{{ $review->user_name ?? 'Anonymous' }}</h6>
                                                     <div class="d-flex">
-                                                        @for($i = 1; $i <= 5; $i++)<i class="fa fa-star {{ $i <= ($review->rating ?? 5) ? 'text-warning' : 'text-muted' }}"></i>@endfor
+                                                     <i class="fa fa-star {{ $i <= ($review->rating ?? 5) ? 'text-warning' : 'text-muted' }}"></i>
                                                     </div>
                                                 </div>
                                                 <p class="text-dark">{{ $review->comment ?? 'Great product!' }}</p>
@@ -425,7 +424,6 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                                         <div class="d-flex align-items-center">
                                             <p class="mb-0 me-3">Please rate:</p>
                                             <div class="d-flex">
-                                                @for($i = 1; $i <= 5; $i++)<i class="fa fa-star text-muted cursor-pointer review-star" data-rating="{{ $i }}"></i>@endfor
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary rounded-pill px-4 py-3">Post Comment</button>
@@ -448,20 +446,20 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                 <p class="wow fadeInUp" data-wow-delay="0.2s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, asperiores ducimus sint quos tempore officia similique quia? Libero, pariatur consectetur?</p>
             </div>
             <div class="custom-related-slider owl-carousel pt-4" id="relatedCarousel">
-                @for ($i = 0; $i < 10; $i++)
+             
 
-                @forelse(($relateditems ?? $items) as $related)
+                @forelse($items as $item)
                     <div class="custom-related-item">
                         <div class="custom-related-item-inner">
                             <div class="position-relative">
                                         <img 
     src="{{ 
-        Str::startsWith($product->image, ['http://', 'https://']) 
-            ? $product->image 
-            : asset('storage/' . $product->image) 
+        Str::startsWith($item->image, ['http://', 'https://']) 
+            ? $item->image 
+            : asset('storage/' . $item->image) 
     }}" 
     class="card-img-top img-fluid" 
-    alt="{{ $product->name }}">
+    alt="{{ $item->name }}">
                                 {{-- <img src="{{ asset('storage/' . $related->image) }}" class="img-fluid w-100 rounded-top" alt="{{ $related->name }}"> --}}
                                 <div class="position-absolute top-0 start-0 m-2 badge bg-primary">{{ $related->condition ?? 'New' }}</div>
                                 <div class="position-absolute top-0 end-0 m-2">
@@ -470,7 +468,7 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                             </div>
                             <div class="custom-text-center">
                                 <a href="#" class="d-block mb-2 text-muted">{{ $related->category->name ?? 'Electronics' }}</a>
-                                <h5 class="mb-2">{{ $related->name }}<br><small class="text-muted">{{ $related->model ?? 'Model' }}</small></h5>
+                                <h5 class="mb-2">{{ $item->name }}<br><small class="text-muted">{{ $item->model ?? 'Model' }}</small></h5>
                                 @php $relDisplayPrice = $related->discount_price ?? $related->price ?? 0; $relOriginalPrice = $related->price ?? 0; @endphp
                                 <div class="d-flex justify-content-center mb-3">
                                     @if($relDisplayPrice < $relOriginalPrice)
@@ -487,7 +485,6 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[nam
                         <p>No related products available.</p>
                     </div>
                 @endforelse
-                @endfor
 
             </div>
         </div>

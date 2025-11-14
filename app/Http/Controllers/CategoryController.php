@@ -11,17 +11,30 @@ use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-public function show($slug)
-{
-    $category = Category::where('slug', $slug)->firstOrFail();
-
-    $products = Product::where('category_id', $category->id)
-                       ->with('attributes')
-                       ->latest()
-                       ->get();
-
-    return view('products.show', compact('category', 'products'));
-}
+    public function show($slug)
+    {
+        // جلب جميع التصنيفات الرئيسية مع الأبناء وعدد منتجاتهم المعتمدة
+        $categories = Category::whereNull('parent_id')
+            ->with(['children' => function ($query) {
+                $query->withCount(['products' => function ($q) {
+                    $q->where('status', 'approved');
+                }]);
+            }])
+            ->get();
+    
+        // جلب التصنيف الحالي بناءً على الـ slug
+        $category = Category::where('slug', $slug)->firstOrFail();
+    
+        // جلب المنتجات التابعة للتصنيف الحالي
+        $products = Product::where('category_id', $category->id)
+            ->with('attributes')
+            ->latest()
+            ->paginate(15); // استخدم paginate بدل get لو عايز نظام أرقام
+    
+        // عرض الصفحة
+        return view('products.show', compact('category', 'products', 'categories'));
+    }
+    
 
 
 

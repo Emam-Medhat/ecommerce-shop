@@ -1,4 +1,4 @@
-<x-navbar title="Favorite Products">
+<x-navbar>
 
 <div class="container py-5">
 
@@ -37,12 +37,12 @@
 
                             {{-- صورة المنتج --}}
                             <div class="overflow-hidden">
-                             <img src="{{ $product->image 
-            ? (Str::startsWith($product->image, ['http://','https://']) 
-                ? $product->image 
-                : asset('storage/' . $product->image)) 
-            : asset('storage/default.png') }}" 
-     class="card-img-top product-image" 
+                             <img src="{{ $product->image
+            ? (Str::startsWith($product->image, ['http://','https://'])
+                ? $product->image
+                : asset('storage/' . $product->image))
+            : asset('storage/default.png') }}"
+     class="card-img-top product-image"
      alt="{{ $product->name }}">
 
                             </div>

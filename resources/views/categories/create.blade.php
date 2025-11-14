@@ -1,7 +1,7 @@
-<x-navbar title="create category">
+<x-navbar title="{{ __('messages.create_category') }}">
 
 <div class="container">
-    <h1>Add Main Category</h1>
+    <h1>{{ __('messages.add_main_category') }}</h1>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -11,14 +11,12 @@
         @csrf
 
         <div class="mb-3">
-            <label>Category Name</label>
-            <input type="text" name="name" class="form-control" placeholder="Enter main category name" required>
+            <label>{{ __('messages.category_name') }}</label>
+            <input type="text" name="name" class="form-control" placeholder="{{ __('messages.enter_main_category_name') }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Main Category</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.add_main_category') }}</button>
     </form>
 </div>
-
-
 
 </x-navbar>

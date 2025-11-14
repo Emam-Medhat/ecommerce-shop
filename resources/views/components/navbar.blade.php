@@ -1,4 +1,4 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">`
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @php
 use App\Models\Cart;
 
@@ -131,6 +131,13 @@ if (Auth::check()) {
         max-width: 100% !important;
     }
 }
+#topbar1{
+    background-color: #f28b00;
+}
+small, .small {
+    font-size: 1.1em;
+    color: black;
+}
 </style>
 
 
@@ -173,7 +180,7 @@ if (Auth::check()) {
 
 
     <!-- Topbar Start -->
-    <div class="container-fluid px-5 d-none border-bottom d-lg-block">
+    <div class="container-fluid px-5 d-none border-bottom d-lg-block" id="topbar1">
         <div class="row gx-0 align-items-center">
             <div class="col-lg-4 text-center text-lg-start mb-lg-0">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
@@ -198,16 +205,27 @@ if (Auth::check()) {
                             <a href="#" class="dropdown-item"> Dolar</a>
                         </div>
                     </div>
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown"><small>
                                 English</small></a>
                         <div class="dropdown-menu rounded">
                             <a href="#" class="dropdown-item"> English</a>
-                            <a href="#" class="dropdown-item"> Turkish</a>
-                            <a href="#" class="dropdown-item"> Spanol</a>
-                            <a href="#" class="dropdown-item"> Italiano</a>
+                            <a href="#" class="dropdown-item"> Arabic</a>
                         </div>
-                    </div>
+                    </div> --}}
+
+
+           <div class="dropdown">
+    <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown">
+        <small>{{ strtoupper(app()->getLocale()) }}</small>
+    </a>
+    <div class="dropdown-menu rounded">
+        <a href="{{ route('change.lang', ['lang' => 'en']) }}" class="dropdown-item">English</a>
+        <a href="{{ route('change.lang', ['lang' => 'ar']) }}" class="dropdown-item">Arabic</a>
+    </div>
+</div>
+
+
                     <div class="dropdown">
                         <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                                     class="fa fa-home me-2"></i> My Dashboard</small></a>
@@ -217,13 +235,14 @@ if (Auth::check()) {
                             @else
                                 <a href="{{ route('login') }}" class="dropdown-item">Login </a>
                             @endif
-                            <a href="#" class="dropdown-item"> Dashboard</a>
+                            @auth
+    @if(auth()->user()->role === 'admin')
+        <a href="{{ route('categories.index') }}" class="dropdown-item">Dashboard</a>
+    @endif
+@endauth
                             <a href="#" class="dropdown-item"> Wishlist</a>
                             <a href="{{ route('cart.index') }}" class="dropdown-item"> My Card</a>
                             <a href="{{ route('favorites.index') }}" class="dropdown-item"> My favorites</a>
-                            <a href="#" class="dropdown-item"> Notifications</a>
-                            <a href="#" class="dropdown-item"> My messages</a>
-                            <a href="#" class="dropdown-item"> Account Settings</a>
                             <a href="{{ route('logout') }}" class="dropdown-item"> Log Out</a>
                         </div>
                     </div>
@@ -236,7 +255,7 @@ if (Auth::check()) {
             <div class="col-md-4 col-lg-3 text-center text-lg-start">
                 <div class="d-inline-flex align-items-center">
                     <a href="" class="navbar-brand p-0">
-                        <h1 class="display-5 text-primary m-0"><a href="{{url('/')}}">Electro</a><i
+                        <h1 class="display-5 text-primary m-0"><a href="{{url('/')}}">Emo store</a><i
                                 class="fas fa-shopping-bag text-secondary me-2"></i></h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
@@ -364,10 +383,16 @@ if (Auth::check()) {
         @else
             @foreach($cartItems as $item)
                 <li class="dropdown-item px-2 py-2 border-bottom d-flex align-items-center">
-                    <img src="{{ asset('storage/' . $item->product->image) }}"
-                         alt="{{ $item->product->name }}"
-                         class="rounded shadow-sm me-2"
-                         style="width: 50px; height: 50px; object-fit: cover;">
+                 <img
+    src="{{
+        Str::startsWith($item->image, ['http://', 'https://'])
+            ? $item->image
+            : asset('storage/' . $item->image)
+    }}"
+    alt="{{ $item->product->name ?? $item->name ?? 'Product image' }}"
+    class="rounded shadow-sm me-2"
+    style="width: 50px; height: 50px; object-fit: cover;">
+
                     <div class="flex-grow-1">
                         <div class="fw-semibold small text-dark mb-1">{{ Str::limit($item->product->name, 30) }}</div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -499,10 +524,6 @@ if (Auth::check()) {
     </div>
 </div>
 
-
-
-
-
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">products</a>
                                 <div class="dropdown-menu m-0">
@@ -561,13 +582,6 @@ if (Auth::check()) {
         </div>
     </div>
     {{ $slot }}
-    <!-- Navbar & Hero End -->
-<!-- Scripts -->
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('lib/wow/wow.min.js') }}"></script>
-<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script> --}}
 
 <!-- Scripts ngrok -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -576,7 +590,6 @@ if (Auth::check()) {
 <script src="/lib/wow/wow.min.js"></script>
 <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="/js/main.js"></script>
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -40,8 +40,8 @@ public function bulkAction(Request $request)
 
     Product::whereIn('id', $request->selected_products)->update(['status' => $status]);
 
-    $msg = $request->action === 'approve' 
-            ? '✅ تم موافقة المنتجات المحددة بنجاح' 
+    $msg = $request->action === 'approve'
+            ? '✅ تم موافقة المنتجات المحددة بنجاح'
             : '❌ تم رفض المنتجات المحددة بنجاح';
 
     return redirect()->back()->with('success', $msg);

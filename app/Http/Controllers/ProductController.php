@@ -89,15 +89,42 @@ public function index(Request $request)
             $query->where('discount_price', '<=', $maxPrice);
         })
         ->where('status', 'approved')
-        ->get();
+        ->paginate(15); // عرض 30 منتج لكل صفحة - غير الرقم حسب احتياجك
 
     return view('shop', compact('products', 'categories', 'categoryId', 'maxPrice'));
 }
 
+// public function index(Request $request)
+// {
+//     $categoryId = $request->get('category');
+//     $maxPrice = $request->get('max_price'); // القيمة اللي جايه من slider
 
+//     $categories = Category::whereNull('parent_id')
+//         ->with(['children' => function($query) {
+//             $query->withCount(['products' => function($q) {
+//                 $q->where('status', 'approved');
+//             }]);
+//         }])
+//         ->withCount(['products' => function ($query) {
+//             $query->where('status', 'approved');
+//         }])
+//         ->get();
 
+//     $products = Product::with('attributes')
+//         ->when($categoryId, function($query, $categoryId) {
+//             $query->where('category_id', $categoryId)
+//                   ->orWhereHas('category', function($q) use ($categoryId) {
+//                       $q->where('parent_id', $categoryId);
+//                   });
+//         })
+//         ->when($maxPrice, function($query, $maxPrice) {
+//             $query->where('discount_price', '<=', $maxPrice);
+//         })
+//         ->where('status', 'approved')
+//         ->paginate(30); // عرض 30 منتج لكل صفحة - غير الرقم حسب احتياجك
 
-
+//     return view('shop', compact('products', 'categories', 'categoryId', 'maxPrice'));
+// }
 
 
 public function create()
@@ -162,27 +189,19 @@ public function show($id)
 {
         $items = Product::with('attributes')->get();
 
+
     $product = Product::with('attributes')->findOrFail($id);
     return view('products.single', compact('product', 'items'));
 }
 
-// public function productsByCategory($id)
-// {
-//     $category = \App\Models\Category::findOrFail($id);
-//     $products = \App\Models\Product::where('category_id', $id)->get();
+   public function edit($id)
+{
+    $product = Product::with('attributes')->findOrFail($id);
+       $mainCategories = Category::whereNull('parent_id')->get();
 
-//     return view('products.show_single', compact('products', 'category'));
-// }
+    return view('products.edit', compact('product', 'mainCategories'));
+}
 
-
-
-
-
-    public function edit($id)
-    {
-        $product = Product::with('attributes')->findOrFail($id);
-        return view('products.edit', compact('product'));
-    }
 
     public function update(Request $request, $id)
     {
@@ -190,7 +209,7 @@ public function show($id)
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category' => 'required|string|max:100',
+            'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric',
             'discount_price' => 'nullable|numeric',
             'description' => 'nullable|string',
@@ -214,7 +233,8 @@ public function show($id)
             }
         }
 
-        return redirect()->route('products.index')->with('success', 'تم تحديث المنتج بنجاح!');
+    return redirect()->route('admin.products.index')->with('success', 'تم تحديث المنتج بنجاح!');
+
     }
 
     public function destroy($id)
@@ -223,8 +243,9 @@ public function show($id)
         $product->attributes()->delete();
         $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'تم حذف المنتج بنجاح!');
+        return redirect()->route('admin.products.index')->with('success', 'تم حذف المنتج بنجاح!');
     }
+
 
 
 

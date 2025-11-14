@@ -1,13 +1,13 @@
-<x-navbar title="All Users">
-
+<x-app>
+    <x-dashboard>
     <div class="container py-5">
         <h2 class="text-center mb-5 text-primary fw-bold">
-            👥 قائمة المستخدمين
+            👥 {{ __('messages.users_list') }}
         </h2>
 
         @if($users->isEmpty())
             <div class="alert alert-info text-center py-4 fs-5 shadow-sm rounded-4">
-                لا يوجد مستخدمون حتى الآن.
+                {{ __('messages.no_users_yet') }}
             </div>
         @else
             <div class="row g-4">
@@ -23,21 +23,21 @@
                                     style="object-fit: cover;">
                                 <h5 class="fw-bold text-dark mb-1">{{ $user->name }}</h5>
                                 <span class="badge {{ $user->role === 'admin' ? 'bg-danger' : 'bg-secondary' }}">
-                                    {{ $user->role === 'admin' ? 'مدير' : 'مستخدم عادي' }}
+                                    {{ $user->role === 'admin' ? __('messages.admin') : __('messages.regular_user') }}
                                 </span>
                             </div>
 
                             <div class="card-body text-center">
                                 <p class="text-muted mb-1">
                                     <i class="fas fa-envelope text-primary me-2" aria-hidden="true"></i>
-                                    <span class="visually-hidden">البريد الإلكتروني:</span>
+                                    <span class="visually-hidden">{{ __('messages.email') }}:</span>
                                     {{ $user->email }}
                                 </p>
 
                                 @if($user->phone)
                                     <p class="text-muted mb-1">
                                         <i class="fas fa-phone text-success me-2" aria-hidden="true"></i>
-                                        <span class="visually-hidden">الهاتف:</span>
+                                        <span class="visually-hidden">{{ __('messages.phone') }}:</span>
                                         {{ $user->phone }}
                                     </p>
                                 @endif
@@ -45,15 +45,23 @@
                                 @if($user->address)
                                     <p class="text-muted mb-0">
                                         <i class="fas fa-map-marker-alt text-danger me-2" aria-hidden="true"></i>
-                                        <span class="visually-hidden">العنوان:</span>
+                                        <span class="visually-hidden">{{ __('messages.address') }}:</span>
                                         {{ $user->address }}
+                                    </p>
+                                @endif
+
+                                   @if($user->address)
+                                    <p class="text-muted mb-0">
+                                        <i class="fas fa-map-marker-alt text-danger me-2" aria-hidden="true"></i>
+                                        <span class="visually-hidden">{{ __('messages.role') }}:</span>
+                                        {{ $user->role }}
                                     </p>
                                 @endif
                             </div>
 
                             <div class="card-footer bg-white text-center border-0 pb-4">
                                 <a href="{{ route('profile.show', $user->id) }}" class="btn btn-outline-primary px-4 rounded-pill btn-hover mb-2">
-                                    عرض الملف الشخصي
+                                    {{ __('messages.view_profile') }}
                                 </a>
 
                                 <form action="{{ route('profile.destroy', $user->id) }}" method="POST" class="d-inline">
@@ -61,8 +69,8 @@
                                     @method('DELETE')
                                     <button type="submit"
                                             class="btn btn-outline-danger px-4 rounded-pill btn-hover"
-                                            onclick="return confirm('هل أنت متأكد من حذف هذا المستخدم؟');">
-                                        حذف المستخدم
+                                            onclick="return confirm('{{ __('messages.confirm_delete_user') }}');">
+                                        {{ __('messages.delete_user') }}
                                     </button>
                                 </form>
                             </div>
@@ -89,5 +97,6 @@
             word-break: break-word;
         }
     </style>
+</x-dashboard>
+</x-app>
 
-</x-navbar>

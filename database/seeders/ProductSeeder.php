@@ -202,6 +202,7 @@ class ProductSeeder extends Seeder
                     'favorite' => rand(0,1),
                     'image' => $images[$key][$index] ?? 'https://via.placeholder.com/300',
                     'category_id' => $category->id,
+                    'user_id' => 14 ,
                 ]);
             }
         }

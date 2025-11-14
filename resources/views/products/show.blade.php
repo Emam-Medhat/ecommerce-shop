@@ -85,16 +85,574 @@ use Illuminate\Support\Str;
             top: 20px; 
         }
     </style>
+        <style>
+        /* ======================== */
+        /* BADGE STYLING */
+        /* ======================== */
+        .product-card {
+            position: relative;
+        }
+
+        .badge-condition {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ======================== */
+        /* PADDING OVERRIDES */
+        /* ======================== */
+        .py-3 {
+            padding-top: 1rem !important;
+            padding-bottom: 0px !important;
+        }
+
+        /* ======================== */
+        /* PRODUCT CATEGORIES */
+        /* ======================== */
+        .product-categories {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-categories h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f28b00;
+        }
+
+        .categories-item {
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .categories-item a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .categories-item a:hover {
+            color: #f28b00;
+            margin-left: 5px;
+        }
+
+        .toggle-btn {
+            color: #f28b00;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(242, 139, 0, 0.1) !important;
+        }
+
+        .subcategories {
+            transition: all 0.3s ease;
+        }
+
+        /* ======================== */
+        /* PRICE FILTER */
+        /* ======================== */
+        .price {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .price h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f28b00;
+        }
+
+        .form-range {
+            height: 6px;
+            border-radius: 3px;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            width: 20px;
+            height: 20px;
+            background: #f28b00;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #f28b00;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        output {
+            font-weight: 700;
+            color: #f28b00;
+            margin-left: 10px;
+        }
+
+        /* ======================== */
+        /* PRODUCT COLOR */
+        /* ======================== */
+        .product-color {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .product-color h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f28b00;
+        }
+
+        .product-color-item {
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-color-item:hover {
+            margin-left: 5px;
+        }
+
+        .product-color-item a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .product-color-item a:hover {
+            color: #f28b00;
+        }
+
+        /* ======================== */
+        /* ADDITIONAL PRODUCTS */
+        /* ======================== */
+        .additional-product {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .additional-product h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f28b00;
+        }
+
+        .additional-product-item {
+            padding: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .additional-product-item label {
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .additional-product-item:hover label {
+            color: #f28b00;
+            margin-left: 5px;
+        }
+
+        /* ======================== */
+        /* FEATURED PRODUCT */
+        /* ======================== */
+        .featured-product {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .featured-product h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f28b00;
+        }
+
+        .featured-product-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .featured-product-item:last-child {
+            border-bottom: none;
+        }
+
+        .featured-product-item:hover {
+            transform: translateX(-5px);
+        }
+
+        .featured-product-item h6 {
+            font-weight: 700;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        /* ======================== */
+        /* PRODUCT TAGS */
+        /* ======================== */
+        .product-tags {
+            background: transparent;
+        }
+
+        .product-tags h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f28b00;
+        }
+
+        .product-tags-items a {
+            display: inline-block;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .product-tags-items a:hover {
+            background: #f28b00;
+            color: white;
+            border-color: #f28b00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(242, 139, 0, 0.3);
+        }
+
+        /* ======================== */
+        /* PRODUCT ITEM */
+        /* ======================== */
+        .product-item {
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-item-inner {
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-item-inner-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-item-inner-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover .product-item-inner-item img {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover .product-details {
+            opacity: 1;
+        }
+
+        .product-details a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #f28b00;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .product-details a:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+        }
+
+        /* ======================== */
+        /* SORT & SEARCH */
+        /* ======================== */
+        .input-group {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .input-group input {
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #f28b00;
+            box-shadow: 0 0 0 3px rgba(242, 139, 0, 0.1);
+        }
+
+        .bg-light.ps-3 {
+            background: #f9f9f9 !important;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        #categorySelect {
+            background: transparent;
+            border: none;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #categorySelect:focus {
+            outline: none;
+            color: #f28b00;
+        }
+
+        /* ======================== */
+        /* PRODUCTS MINI */
+        /* ======================== */
+        .products-mini-item {
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .products-mini-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .products-mini-item img {
+            height: 150px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .products-mini-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .products-mini-content h6 {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        /* ======================== */
+        /* BUTTONS */
+        /* ======================== */
+        .btn-primary {
+            background: #f28b00 !important;
+            border-color: #f28b00 !important;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #ff7f00 !important;
+            border-color: #ff7f00 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(242, 139, 0, 0.3);
+        }
+
+        /* ======================== */
+        /* PAGINATION */
+        /* ======================== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-top: 30px;
+        }
+
+        .pagination .page-item {
+            list-style: none;
+        }
+
+        .pagination .page-link {
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #f28b00;
+            color: #fff;
+            border-color: #f28b00;
+            transform: translateY(-2px);
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination .page-item.disabled .page-link {
+            color: #999;
+            background-color: #f9f9f9;
+            border-color: #e0e0e0;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-item.disabled .page-link:hover {
+            transform: none;
+            background-color: #f9f9f9;
+        }
+
+        /* ======================== */
+        /* RESPONSIVE */
+        /* ======================== */
+        @media (max-width: 768px) {
+            .product-categories,
+            .price,
+            .product-color,
+            .additional-product,
+            .featured-product {
+                margin-bottom: 20px;
+            }
+
+            .product-item-inner-item img {
+                height: 150px;
+            }
+
+            .products-mini-item img {
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-categories h4,
+            .price h4,
+            .product-color h4,
+            .additional-product h4,
+            .product-tags h4 {
+                font-size: 1rem;
+            }
+
+            .products-mini-item {
+                margin-bottom: 15px;
+            }
+        }
+
+        .g-4, .gy-4 {
+            display: flex !important;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 1400px) {
+            .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+                max-width: 100% !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                width: 17% !important;
+            }
+
+            .col-lg-4 {
+                flex: 0 0 auto;
+                width: 20% !important;
+            }
+        }
+
+        .btn.btn-primary {
+            position: relative;
+            top: -25px;
+        }
+    </style>
+    <style>
+        .align-items-center {
+    align-items: center !important;
+    justify-content: space-between;
+}
+@media (min-width: 992px) {
+    .col-lg-9 {
+        flex: 0 0 auto;
+        width: 82% !important;
+    }
+}
+.pagination {
+    display: flex !important;
+}
+    </style>
 </head>
 
 <body>
     <!-- Single Page Header start -->
     <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">{{ $category->name ?? 'Shop Page' }}</h1>
+        <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">{{ $category->name ?? __('messages.shop_page') }}</h1>
         <ol class="breadcrumb justify-content-center mb-0 wow fadeInUp" data-wow-delay="0.3s">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-            <li class="breadcrumb-item active text-white">{{ $category->name ?? 'Shop' }}</li>
+            <li class="breadcrumb-item"><a href="#">{{ __('messages.home') }}</a></li>
+            <li class="breadcrumb-item"><a href="#">{{ __('messages.pages') }}</a></li>
+            <li class="breadcrumb-item active text-white">{{ $category->name ?? __('messages.shop') }}</li>
         </ol>
     </div>
     <!-- Single Page Header End -->
@@ -107,8 +665,8 @@ use Illuminate\Support\Str;
                     <div class="d-inline-flex align-items-center">
                         <i class="fa fa-sync-alt fa-2x text-primary"></i>
                         <div class="ms-4">
-                            <h6 class="text-uppercase mb-2">Free Return</h6>
-                            <p class="mb-0">30 days money back guarantee!</p>
+                            <h6 class="text-uppercase mb-2">{{ __('messages.free_return') }}</h6>
+                            <p class="mb-0">{{ __('messages.thirty_days_money_back_guarantee') }}</p>
                         </div>
                     </div>
                 </div>
@@ -118,8 +676,8 @@ use Illuminate\Support\Str;
                     <div class="d-flex align-items-center">
                         <i class="fab fa-telegram-plane fa-2x text-primary"></i>
                         <div class="ms-4">
-                            <h6 class="text-uppercase mb-2">Free Shipping</h6>
-                            <p class="mb-0">Free shipping on all order</p>
+                            <h6 class="text-uppercase mb-2">{{ __('messages.free_shipping') }}</h6>
+                            <p class="mb-0">{{ __('messages.free_shipping_on_all_orders') }}</p>
                         </div>
                     </div>
                 </div>
@@ -129,8 +687,8 @@ use Illuminate\Support\Str;
                     <div class="d-flex align-items-center">
                         <i class="fas fa-life-ring fa-2x text-primary"></i>
                         <div class="ms-4">
-                            <h6 class="text-uppercase mb-2">Support 24/7</h6>
-                            <p class="mb-0">We support online 24 hrs a day</p>
+                            <h6 class="text-uppercase mb-2">{{ __('messages.support_24_7') }}</h6>
+                            <p class="mb-0">{{ __('messages.we_support_online_24_hrs_a_day') }}</p>
                         </div>
                     </div>
                 </div>
@@ -140,8 +698,8 @@ use Illuminate\Support\Str;
                     <div class="d-flex align-items-center">
                         <i class="fas fa-credit-card fa-2x text-primary"></i>
                         <div class="ms-4">
-                            <h6 class="text-uppercase mb-2">Receive Gift Card</h6>
-                            <p class="mb-0">Recieve gift all over oder $50</p>
+                            <h6 class="text-uppercase mb-2">{{ __('messages.receive_gift_card') }}</h6>
+                            <p class="mb-0">{{ __('messages.receive_gift_over_50') }}</p>
                         </div>
                     </div>
                 </div>
@@ -151,8 +709,8 @@ use Illuminate\Support\Str;
                     <div class="d-flex align-items-center">
                         <i class="fas fa-lock fa-2x text-primary"></i>
                         <div class="ms-4">
-                            <h6 class="text-uppercase mb-2">Secure Payment</h6>
-                            <p class="mb-0">We Value Your Security</p>
+                            <h6 class="text-uppercase mb-2">{{ __('messages.secure_payment') }}</h6>
+                            <p class="mb-0">{{ __('messages.we_value_your_security') }}</p>
                         </div>
                     </div>
                 </div>
@@ -162,8 +720,8 @@ use Illuminate\Support\Str;
                     <div class="d-flex align-items-center">
                         <i class="fas fa-blog fa-2x text-primary"></i>
                         <div class="ms-4">
-                            <h6 class="text-uppercase mb-2">Online Service</h6>
-                            <p class="mb-0">Free return products in 30 days</p>
+                            <h6 class="text-uppercase mb-2">{{ __('messages.online_service') }}</h6>
+                            <p class="mb-0">{{ __('messages.free_return_products_in_30_days') }}</p>
                         </div>
                     </div>
                 </div>
@@ -179,10 +737,10 @@ use Illuminate\Support\Str;
                 <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
                     <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
                         <div>
-                            <p class="text-muted mb-3">Find The Best Camera for You!</p>
-                            <h3 class="text-primary">Smart Camera</h3>
-                            <h1 class="display-3 text-secondary mb-0">40% <span
-                                    class="text-primary fw-normal">Off</span></h1>
+                            <p class="text-muted mb-3">{{ __('messages.find_the_best_camera_for_you') }}</p>
+                            <h3 class="text-primary">{{ __('messages.smart_camera') }}</h3>
+                            <h1 class="display-3 text-secondary mb-0">{{ __('messages.forty_percent') }} <span
+                                    class="text-primary fw-normal">{{ __('messages.off') }}</span></h1>
                         </div>
                        <img src="{{ asset('img/product-1.png') }}" class="img-fluid" alt="">
                     </a>
@@ -190,10 +748,10 @@ use Illuminate\Support\Str;
                 <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
                     <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
                         <div>
-                            <p class="text-muted mb-3">Find The Best Whatches for You!</p>
-                            <h3 class="text-primary">Smart Whatch</h3>
-                            <h1 class="display-3 text-secondary mb-0">20% <span
-                                    class="text-primary fw-normal">Off</span></h1>
+                            <p class="text-muted mb-3">{{ __('messages.find_the_best_watches_for_you') }}</p>
+                            <h3 class="text-primary">{{ __('messages.smart_watch') }}</h3>
+                            <h1 class="display-3 text-secondary mb-0">{{ __('messages.twenty_percent') }} <span
+                                    class="text-primary fw-normal">{{ __('messages.off') }}</span></h1>
                         </div>
                         <img src="{{ asset('img/product-2.png') }}" class="img-fluid" alt="">
                     </a>
@@ -211,13 +769,13 @@ use Illuminate\Support\Str;
                 <div class="col-lg-3 wow fadeInUp sidebar-sticky" data-wow-delay="0.1s">
                     <!-- Search -->
                     <div class="input-group w-100 mx-auto d-flex mb-4">
-                        <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
+                        <input type="search" class="form-control p-3" placeholder="{{ __('messages.keywords') }}" aria-describedby="search-icon-1">
                         <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                     </div>
 
                     <!-- Product Categories -->
                     <div class="product-categories mb-4">
-                        <h4>Products Categories</h4>
+                        <h4>{{ __('messages.products_categories') }}</h4>
                         <ul class="list-unstyled">
                             @foreach($categories ?? [] as $cat)
                             <li>
@@ -232,16 +790,19 @@ use Illuminate\Support\Str;
                     </div>
 
                     <!-- Price Filter -->
-                    <div class="price mb-4">
-                        <h4 class="mb-2">Price</h4>
-                        <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500"
-                            value="0" oninput="amount.value=rangeInput.value">
-                        <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
+                   <div class="price mb-4">
+                        <h4 class="mb-2">{{ __('messages.price') }}</h4>
+                        <form id="priceFilterForm" method="GET">
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                            <input type="range" class="form-range w-100" id="rangeInput" name="max_price"
+                                min="0" max="500" value="{{ $maxPrice ?? 500 }}" oninput="amount.value=rangeInput.value; this.form.submit()">
+                            <output id="amount">{{ $maxPrice ?? 500 }}</output>
+                        </form>
                     </div>
 
                     <!-- Select By Color -->
                     <div class="product-color mb-3">
-                        <h4>Select By Color</h4>
+                        <h4>{{ __('messages.select_by_color') }}</h4>
                         <ul class="list-unstyled">
                             @foreach($colors ?? ['Gold', 'Green', 'White'] as $color)
                             <li>
@@ -257,7 +818,7 @@ use Illuminate\Support\Str;
 
                     <!-- Additional Products -->
                     <div class="additional-product mb-4">
-                        <h4>Additional Products</h4>
+                        <h4>{{ __('messages.additional_products') }}</h4>
                         @foreach($categories ?? [] as $cat)
                         <div class="additional-product-item">
                             <input type="radio" class="me-2" id="cat-{{ $cat->id }}" name="categories" value="{{ $cat->id }}">
@@ -268,7 +829,7 @@ use Illuminate\Support\Str;
 
                     <!-- Featured Products -->
                     <div class="featured-product mb-4">
-                        <h4 class="mb-3">Featured products</h4>
+                        <h4 class="mb-3">{{ __('messages.featured_products') }}</h4>
                         @forelse($featuredProducts ?? [] as $featured)
                             <div class="featured-product-item d-flex mb-3">
                                 <div class="rounded me-3" style="width: 80px; height: 80px; overflow: hidden;">
@@ -290,10 +851,10 @@ use Illuminate\Support\Str;
                                 </div>
                             </div>
                         @empty
-                            <p>No featured products available.</p>
+                            <p>{{ __('messages.no_featured_products_available') }}</p>
                         @endforelse
                         <div class="d-flex justify-content-center my-4">
-                            <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w-100">View More</a>
+                            <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w-100">{{ __('messages.view_more') }}</a>
                         </div>
                     </div>
 
@@ -303,16 +864,16 @@ use Illuminate\Support\Str;
                             <img src="{{ asset('img/product-banner-2.jpg') }}" class="img-fluid w-100 rounded" alt="Image">
                             <div class="text-center position-absolute d-flex flex-column align-items-center justify-content-center rounded p-4"
                                 style="width: 100%; height: 100%; top: 0; right: 0; background: rgba(242, 139, 0, 0.3);">
-                                <h5 class="display-6 text-primary">SALE</h5>
-                                <h4 class="text-secondary">Get UP To 50% Off</h4>
-                                <a href="#" class="btn btn-primary rounded-pill px-4">Shop Now</a>
+                                <h5 class="display-6 text-primary">{{ __('messages.sale') }}</h5>
+                                <h4 class="text-secondary">{{ __('messages.get_up_to_50_percent_off') }}</h4>
+                                <a href="#" class="btn btn-primary rounded-pill px-4">{{ __('messages.shop_now') }}</a>
                             </div>
                         </div>
                     </a>
 
                     <!-- Product Tags -->
                     <div class="product-tags py-4">
-                        <h4 class="mb-3">PRODUCT TAGS</h4>
+                        <h4 class="mb-3">{{ __('messages.product_tags') }}</h4>
                         <div class="product-tags-items bg-light rounded p-3">
                             @foreach($tags ?? ['New', 'Brand', 'Black', 'White', 'Tablets', 'Phone', 'Camera', 'Drone', 'Television', 'Sales'] as $tag)
                                 <a href="#" class="border rounded py-1 px-2 mb-2 d-inline-block me-1">{{ $tag }}</a>
@@ -329,9 +890,9 @@ use Illuminate\Support\Str;
                             alt="Image">
                         <div class="position-absolute rounded d-flex flex-column align-items-center justify-content-center text-center"
                             style="width: 100%; height: 250px; top: 0; left: 0; background: rgba(242, 139, 0, 0.3);">
-                            <h4 class="display-5 text-primary">SALE</h4>
-                            <h3 class="display-4 text-white mb-4">Get UP To 50% Off</h3>
-                            <a href="#" class="btn btn-primary rounded-pill">Shop Now</a>
+                            <h4 class="display-5 text-primary">{{ __('messages.sale') }}</h4>
+                            <h3 class="display-4 text-white mb-4">{{ __('messages.get_up_to_50_percent_off') }}</h3>
+                            <a href="#" class="btn btn-primary rounded-pill">{{ __('messages.shop_now') }}</a>
                         </div>
                     </div>
 
@@ -339,25 +900,27 @@ use Illuminate\Support\Str;
                     <div class="row g-4">
                         <div class="col-xl-7">
                             <div class="input-group w-100 mx-auto d-flex">
-                                <input type="search" class="form-control p-3" placeholder="keywords"
+                                <input type="search" class="form-control p-3" placeholder="{{ __('messages.keywords') }}"
                                     aria-describedby="search-icon-1">
                                 <span id="search-icon-1" class="input-group-text p-3"><i
                                         class="fa fa-search"></i></span>
                             </div>
                         </div>
-                        <div class="col-xl-3 text-end">
+                       <div class="col-xl-3 text-end">
                             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between">
-                                <label for="electronics">Sort By:</label>
-                                <select id="electronics" name="electronicslist"
-                                    class="border-0 form-select-sm bg-light me-3" form="electronicsform">
-                                    <option value="volvo">Default Sorting</option>
-                                    <option value="volv">Nothing</option>
-                                    <option value="sab">Popularity</option>
-                                    <option value="saab">Newness</option>
-                                    <option value="opel">Average Rating</option>
-                                    <option value="audio">Low to high</option>
-                                    <option value="audi">High to low</option>
-                                </select>
+                                <label for="categorySelect">{{ __('messages.sort') }}:</label>
+                                <form id="categoryForm" method="GET" action="{{ route('shop') }}">
+                                    <select id="categorySelect" name="category" class="border-0 form-select-sm bg-light me-3"
+                                            onchange="document.getElementById('categoryForm').submit()">
+                                        <option value="">{{ __('messages.default_sorting') }}</option>
+                                        @foreach($categories as $cat)
+                                            <option value="{{ $cat->id }}"
+                                                {{ (isset($categoryId) && $categoryId == $cat->id) ? 'selected' : '' }}>
+                                                {{ $cat->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </form>
                             </div>
                         </div>
                         <div class="col-lg-4 col-xl-2">
@@ -394,7 +957,7 @@ use Illuminate\Support\Str;
                                                     };
                                                 @endphp
                                                 <span class="badge {{ $conditionClass }} position-absolute top-0 start-0 m-2 px-2 py-1 rounded-pill shadow">
-                                                    {{ ucfirst($product->condition ?? 'Unknown') }}
+                                                    {{ ucfirst($product->condition ?? __('messages.unknown')) }}
                                                 </span>
                                                 
                                             <img 
@@ -408,15 +971,15 @@ use Illuminate\Support\Str;
     style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px;">
 
                                                 {{-- <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}" style="height: auto; object-fit: cover;"> --}}
-                                                <div class="product-details position-absolute top-0 end-0 m-2">
+                                                {{-- <div class="product-details position-absolute top-0 end-0 m-2">
                                                     <a href="{{ route('products.show', $product->id) }}" class="text-white bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
                                                         <i class="fa fa-eye fa-sm"></i>
                                                     </a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="text-center rounded-bottom p-4">
                                                 <h5 class="fw-bold">{{ $product->name }}</h5>
-                                                <p class="text-muted">{{ $product->category->name ?? 'غير محدد' }}</p>
+                                                <p class="text-muted">{{ $product->category->name ?? __('messages.not_specified') }}</p>
 
                                                 <div class="mb-2">
                                                     @if($product->discount_price && $product->discount_price < $product->price)
@@ -452,7 +1015,7 @@ use Illuminate\Support\Str;
                                                 </button> --}}
                                                 <a href="{{ route('products.show', $product->id) }}"
                                                 class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4"><i
-                                                    class="fas fa-shopping-cart me-2"></i> show product</a>
+                                                    class="fas fa-shopping-cart me-2"></i> {{ __('messages.show_product') }}</a>
                                             </form>
                                             
                                             <div class="d-flex justify-content-between align-items-center">
@@ -475,13 +1038,25 @@ use Illuminate\Support\Str;
                                 </div>
                                 @empty
                                 <div class="col-12 text-center py-5">
-                                    <h4 class="text-muted">No products found in this category.</h4>
-                                    <p class="text-muted">Please check back later or browse other categories.</p>
+                                    <h4 class="text-muted">{{ __('messages.no_products_found_in_this_category') }}</h4>
+                                    <p class="text-muted">{{ __('messages.please_check_back_later_or_browse_other_categories') }}</p>
                                 </div>
                                 @endforelse
 
                                 <!-- Pagination -->
-                               
+                               <div class="pagination">
+    @if ($products->onFirstPage() === false)
+        <a href="{{ $products->previousPageUrl() }}">{{ __('messages.previous') }}</a>
+    @endif
+
+    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+        <a href="{{ $url }}" class="{{ $products->currentPage() == $page ? 'active' : '' }}">{{ $page }}</a>
+    @endforeach
+
+    @if ($products->hasMorePages())
+        <a href="{{ $products->nextPageUrl() }}">{{ __('messages.next') }}</a>
+    @endif
+</div>
                             </div>
                         </div>
 
@@ -504,7 +1079,7 @@ use Illuminate\Support\Str;
                                             </div>
                                             <div class="col-7">
                                                 <div class="products-mini-content p-3">
-                                                    <a href="#" class="d-block mb-2 text-muted">{{ $product->category->name ?? 'Electronics' }}</a>
+                                                    <a href="#" class="d-block mb-2 text-muted">{{ $product->category->name ?? __('messages.electronics') }}</a>
                                                     <a href="{{ route('products.show', $product->id) }}" class="d-block h4">{{ $product->name }}</a>
                                                     @if($product->discount_price && $product->discount_price < $product->price)
                                                         <del class="me-2 fs-5">${{ number_format($product->price, 2) }}</del>
@@ -535,7 +1110,7 @@ use Illuminate\Support\Str;
                                                 <input type="hidden" name="qty" value="1">
                                                 
                                                 <button type="submit" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
-                                                    <i class="fas fa-shopping-cart me-2"></i> Add To Cart
+                                                    <i class="fas fa-shopping-cart me-2"></i> {{ __('messages.add_to_cart') }}
                                                 </button>
                                             </form>
                                             
@@ -552,8 +1127,8 @@ use Illuminate\Support\Str;
                                 </div>
                                 @empty
                                 <div class="col-12 text-center py-5">
-                                    <h4 class="text-muted">No products found in this category.</h4>
-                                    <p class="text-muted">Please check back later or browse other categories.</p>
+                                    <h4 class="text-muted">{{ __('messages.no_products_found_in_this_category') }}</h4>
+                                    <p class="text-muted">{{ __('messages.please_check_back_later_or_browse_other_categories') }}</p>
                                 </div>
                                 @endforelse
 
@@ -576,9 +1151,9 @@ use Illuminate\Support\Str;
                             <img src="{{ asset('img/product-banner.jpg') }}" class="img-fluid w-100 rounded" alt="">
                             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
                                 style="background: rgba(255, 255, 255, 0.5);">
-                                <h3 class="display-5 text-primary">EOS Rebel <br> <span>T7i Kit</span></h3>
+                                <h3 class="display-5 text-primary">{{ __('messages.eos_rebel') }} <br> <span>{{ __('messages.t7i_kit') }}</span></h3>
                                 <p class="fs-4 text-muted">$899.99</p>
-                                <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Shop Now</a>
+                                <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">{{ __('messages.shop_now') }}</a>
                             </div>
                         </div>
                     </a>
@@ -589,16 +1164,16 @@ use Illuminate\Support\Str;
                             <img src="{{ asset('img/product-banner-2.jpg') }}" class="img-fluid w-100" alt="">
                             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4"
                                 style="background: rgba(242, 139, 0, 0.5);">
-                                <h2 class="display-2 text-secondary">SALE</h2>
-                                <h4 class="display-5 text-white mb-4">Get UP To 50% Off</h4>
+                                <h2 class="display-2 text-secondary">{{ __('messages.sale') }}</h2>
+                                <h4 class="display-5 text-white mb-4">{{ __('messages.get_up_to_50_percent_off') }}</h4>
 <a href="{{ route('categories.products', $category->id) }}" class="btn btn-primary mt-2">
-    عرض المنتجات
+    {{ __('messages.show_products') }}
 </a>
 
 
 
 
-                                <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Shop Now</a>
+                                <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">{{ __('messages.shop_now') }}</a>
                             </div>
                         </div>
                     </a>

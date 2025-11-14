@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
-        <span class="brand-text font-weight-light">متجري</span>
+        <span class="brand-text font-weight-light">{{ __('messages.brand_name') }}</span>
     </a>
 
     <div class="sidebar">
@@ -9,25 +9,25 @@
                 <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
+                        <p>{{ __('messages.dashboard') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
-                        <p>المنتجات</p>
+                        <p>{{ __('messages.products') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('orders.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-shopping-cart"></i>
-                        <p>الطلبات</p>
+                        <p>{{ __('messages.orders') }}</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('customers.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>العملاء</p>
+                        <p>{{ __('messages.customers') }}</p>
                     </a>
                 </li>
             </ul>

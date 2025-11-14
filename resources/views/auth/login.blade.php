@@ -1,4 +1,4 @@
-<x-navbar title="Page Login">
+<x-navbar title="{{ __('messages.page_login') }}">
 
 <style>
 /* Container الرئيسي */
@@ -113,7 +113,7 @@
 
 <div class="container login-wrapper">
     <div class="login-form">
-        <h3>تسجيل الدخول</h3>
+        <h3>{{ __('messages.login') }}</h3>
 
         @if($errors->any())
             <div class="alert alert-danger">{{ $errors->first() }}</div>
@@ -121,13 +121,13 @@
 
         <form action="{{ route('login.store') }}" method="POST">
             @csrf
-            <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني" required value="{{ old('email') }}">
-            <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
-            <button type="submit" class="btn btn-warning w-100">دخول</button>
+            <input type="email" name="email" class="form-control" placeholder="{{ __('messages.email') }}" required value="{{ old('email') }}">
+            <input type="password" name="password" class="form-control" placeholder="{{ __('messages.password') }}" required>
+            <button type="submit" class="btn btn-warning w-100">{{ __('messages.login') }}</button>
         </form>
 
         <div class="text-center mt-2">
-            ليس لديك حساب؟ <a href="{{ route('register') }}">سجل الآن</a>
+            {{ __('messages.no_account') }} <a href="{{ route('register') }}">{{ __('messages.register_now') }}</a>
         </div>
 
         <div class="social-login">

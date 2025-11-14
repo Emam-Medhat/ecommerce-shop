@@ -30,6 +30,16 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\admin\DashboardController;
 
 
+Route::get('/change-lang/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'ar'])) {
+        session(['locale' => $lang]);
+    }
+    return redirect()->back();
+})->name('change.lang');
+
+
+
+
 Route::get('test',function (){
     return view('test');
 });
@@ -212,9 +222,10 @@ Route::put('/categories/{category}', [CategoryController::class, 'update'])->nam
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy')->middleware(['auth', 'is_admin']);
 
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
-    Route::get('/products/seller', [AdminProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/products/sellers', [AdminProductController::class, 'index'])->name('admin.products.index');
     Route::get('/products/pending', [AdminProductController::class, 'pending'])->name('admin.products.pending');
     Route::post('/products/{id}/approve', [AdminProductController::class, 'approve'])->name('admin.products.approve');
+
     Route::post('/products/{id}/reject', [AdminProductController::class, 'reject'])->name('admin.products.reject');
     Route::delete('/products/seller/{id}', [AdminProductController::class, 'destroy'])->name('admin.products.destroy');
     Route::post('/products/approve-all', [AdminProductController::class, 'approveAll'])->name('admin.products.approveAll');
@@ -224,9 +235,13 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 
 
 // مجموعة Routes للـ Admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::prefix('admin')->name('admin.')->group(function () {
+//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // تقدر تضيف روابط إضافية لكل الأقسام
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/customers', [UserController::class, 'index'])->name('customers.index');
+//     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+//     Route::get('/customers', [UserController::class, 'index'])->name('customers.index');
+// });
+
+Route::prefix('admin')->middleware('is_admin', 'auth')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });

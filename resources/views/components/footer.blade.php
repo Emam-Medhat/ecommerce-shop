@@ -297,7 +297,7 @@
                         <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Address</h4>
+                        <h4 class="text-white">{{ __('messages.address') }}</h4>
                         <p class="mb-2">123 Street New York.USA</p>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                         <i class="fas fa-envelope fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Mail Us</h4>
+                        <h4 class="text-white">{{ __('messages.mail_us') }}</h4>
                         <p class="mb-2">info@example.com</p>
                     </div>
                 </div>
@@ -321,7 +321,7 @@
                         <i class="fa fa-phone-alt fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Telephone</h4>
+                        <h4 class="text-white">{{ __('messages.telephone') }}</h4>
                         <p class="mb-2">(+012) 3456 7890</p>
                     </div>
                 </div>
@@ -333,7 +333,7 @@
                         <i class="fab fa-firefox-browser fa-2x text-primary"></i>
                     </div>
                     <div>
-                        <h4 class="text-white">Yoursite@ex.com</h4>
+                        <h4 class="text-white">{{ __('messages.yoursite_ex') }}</h4>
                         <p class="mb-2">(+012) 3456 7890</p>
                     </div>
                 </div>
@@ -343,52 +343,51 @@
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
                     <div class="footer-item">
-                        <h4 class="text-primary mb-4">Newsletter</h4>
-                        <p class="text-white mb-3">Dolor amet sit justo amet elitr clita ipsum elitr est.Lorem ipsum
-                            dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
+                        <h4 class="text-primary mb-4">{{ __('messages.newsletter') }}</h4>
+                        <p class="text-white mb-3">{{ __('messages.newsletter_description') }}</p>
                         <div class="position-relative mx-auto rounded-pill">
                             <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text"
-                                placeholder="Enter your email">
+                                placeholder="{{ __('messages.enter_your_email') }}">
                             <button type="button"
-                                class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">SignUp</button>
+                                class="btn btn-primary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">{{ __('messages.signup') }}</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-primary mb-4">Customer Service</h4>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Contact Us</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Returns</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Order History</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Site Map</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Testimonials</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> My Account</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Unsubscribe Notification</a>
+                    <h4 class="text-primary mb-4">{{ __('messages.customer_service') }}</h4>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.contact_us') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.returns') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.order_history') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.site_map') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.testimonials') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.my_account') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.unsubscribe_notification') }}</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-primary mb-4">Information</h4>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> About Us</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Delivery infomation</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Warranty</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> FAQ</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Seller Login</a>
+                    <h4 class="text-primary mb-4">{{ __('messages.information') }}</h4>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.about_us') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.delivery_information') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.privacy_policy') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.terms_conditions') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.warranty') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.faq') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.seller_login') }}</a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="text-primary mb-4">Extras</h4>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Brands</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Gift Vouchers</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Affiliates</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Wishlist</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Order History</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Track Your Order</a>
-                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> Track Your Order</a>
+                    <h4 class="text-primary mb-4">{{ __('messages.extras') }}</h4>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.brands') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.gift_vouchers') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.affiliates') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.wishlist') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.order_history') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.track_your_order') }}</a>
+                    <a href="#" class=""><i class="fas fa-angle-right me-2"></i> {{ __('messages.track_your_order') }}</a>
                 </div>
             </div>
         </div>
@@ -402,12 +401,11 @@
         <div class="row g-4 align-items-center">
             <div class="col-md-6 text-center text-md-start mb-md-0">
                 <span class="text-white"><a href="#" class="border-bottom text-white"><i
-                            class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right
-                    reserved.</span>
+                            class="fas fa-copyright text-light me-2"></i>{{ __('messages.site_name') }}</a>, {{ __('messages.all_rights_reserved') }}.</span>
             </div>
             <div class="col-md-6 text-center text-md-end text-white">
-                Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a>.
-                Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
+                {{ __('messages.designed_by') }} <a class="border-bottom text-white" href="https://htmlcodex.com">{{ __('messages.html_codex') }}</a>.
+                {{ __('messages.distributed_by') }} <a class="border-bottom text-white" href="https://themewagon.com">{{ __('messages.themewagon') }}</a>
             </div>
         </div>
     </div>
@@ -426,16 +424,16 @@
 <!-- Chat Box -->
 <div class="chat-box" id="chatBox">
     <div class="chat-header">
-        <span>Live Chat</span>
+        <span>{{ __('messages.live_chat') }}</span>
         <button class="close-chat-btn" id="closeChatBtn"><i class="fas fa-times"></i></button>
     </div>
     <div class="chat-body">
         <!-- Sidebar Users -->
         <div class="chat-sidebar">
             <div class="search-users">
-                <input type="text" id="userSearchInput" placeholder="Search users..." class="form-control form-control-sm rounded-pill">
+                <input type="text" id="userSearchInput" placeholder="{{ __('messages.search_users') }}" class="form-control form-control-sm rounded-pill">
             </div>
-            <h6 class="text-center mb-3">Users</h6>
+            <h6 class="text-center mb-3">{{ __('messages.users') }}</h6>
             <div id="chatUsersList">
                 <!-- Users will load here -->
             </div>
@@ -452,7 +450,7 @@
                 <form id="messageForm" class="d-flex gap-2">
                     @csrf
                     <input type="hidden" id="receiverId" value="">
-                    <input type="text" id="messageInput" class="form-control flex-grow-1 rounded-pill" placeholder="Type a message..." autocomplete="off">
+                    <input type="text" id="messageInput" class="form-control flex-grow-1 rounded-pill" placeholder="{{ __('messages.type_a_message') }}" autocomplete="off">
                     <button type="submit" class="btn btn-primary rounded-pill px-4" id="sendBtn">
                         <i class="fas fa-paper-plane"></i>
                     </button>
@@ -463,7 +461,7 @@
             <!-- Default No User Selected -->
             <div id="noUserSelected" class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-center p-4">
                 <i class="fas fa-comments fa-3x text-muted mb-3"></i>
-                <h6 class="text-muted">Select a user to start chatting</h6>
+                <h6 class="text-muted">{{ __('messages.select_a_user_to_start_chatting') }}</h6>
             </div>
         </div>
     </div>
