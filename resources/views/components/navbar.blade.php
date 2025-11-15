@@ -1,18 +1,15 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @php
 use App\Models\Cart;
-
 $cartItems = auth()->check()
     ? Cart::where('user_id', auth()->id())->with('product')->get()
     : collect(); // لو المستخدم مش داخل
 $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
 $cartCount = $cartItems->sum('quantity');
 @endphp
-
 @php
 $favorites = [];
 $favCount = 0;
-
 if (Auth::check()) {
     $favorites = \App\Models\Favorite::with('product')
         ->where('user_id', Auth::id())
@@ -20,12 +17,10 @@ if (Auth::check()) {
     $favCount = $favorites->count();
 }
 @endphp
-
 <style>
         .navbar .nav-item .dropdown-menu {
             width:50% !important;
         }
-
 /* ستايل الـ Mega Menu محسن - أسماء كلاسات جديدة تماماً لتجنب التداخل، وعدلت العرض عشان المنيو ميبقاش ضيق ويتمحور كويس */
 .custom-mega-wrapper {
     border-radius: 8px !important;
@@ -41,7 +36,6 @@ if (Auth::check()) {
     background-color: #ffffff !important;
     padding: 15px !important; /* زدت الـ padding شوية عشان يبقى أوسع */
 }
-
 .custom-mega-container {
     width: 100% !important;
     padding-left: 15px !important; /* زدت الـ padding */
@@ -49,13 +43,11 @@ if (Auth::check()) {
     margin-left: auto !important;
     margin-right: auto !important;
 }
-
 .custom-mega-flex-center {
     justify-content: center !important;
     display: flex !important; /* ضمن إنه flex */
     flex-wrap: wrap !important; /* عشان يلف لو كتير */
 }
-
 .custom-mega-column {
     width: 20% !important; /* زدت من 12% لـ 20% عشان الأعمدة تبقى أوسع ومتناسبة مع 4-5 فئات رئيسية */
     flex: 0 0 20% !important;
@@ -66,7 +58,6 @@ if (Auth::check()) {
     margin-bottom: 10px !important; /* مساحة أكبر تحت كل عمود */
     word-wrap: break-word !important; /* عشان النصوص الطويلة ميخرجش بره */
 }
-
 .custom-mega-title {
     font-size: 0.95rem !important; /* شوية أصغر */
     border-bottom: 1px solid #007bff;
@@ -76,7 +67,6 @@ if (Auth::check()) {
     margin-bottom: 8px !important;
     text-align: center !important; /* تمحيص العنوان */
 }
-
 .custom-mega-item {
     background-color: transparent !important;
     border: none !important;
@@ -89,13 +79,11 @@ if (Auth::check()) {
     overflow: hidden !important;
     text-overflow: ellipsis !important; /* ... لو النص طويل */
 }
-
 .custom-mega-item:hover {
     background-color: #f8f9fa !important;
     color: #007bff !important;
     border-radius: 4px !important; /* شوية انحناء عند الهوفر */
 }
-
 /* تحسين الـ responsive - على الموبايل هيبقى عمودين */
 @media (max-width: 768px) {
     .custom-mega-wrapper {
@@ -104,14 +92,14 @@ if (Auth::check()) {
         left: 2.5% !important;
         right: 2.5% !important;
         transform: none !important; /* على الموبايل مش محتاج translate */
-        padding: 10px !important;
+        padding: 15px !important;
     }
     .custom-mega-column {
         width: 50% !important; /* عمودين على الموبايل */
         flex: 0 0 50% !important;
         max-width: 50% !important;
-        padding-left: 5px !important;
-        padding-right: 5px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
     .custom-mega-title {
         font-size: 1rem !important;
@@ -121,14 +109,94 @@ if (Auth::check()) {
         white-space: normal !important; /* على الموبايل يلف السطر */
         font-size: 0.95rem !important;
     }
+    .custom-mega-container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
 }
-
 /* لو الشاشة أصغر، عمود واحد */
 @media (max-width: 480px) {
     .custom-mega-column {
         width: 100% !important;
         flex: 0 0 100% !important;
         max-width: 100% !important;
+    }
+}
+/* إصلاح عرض الـ dropdown على الهوفر (كان display: flow خطأ) */
+.navbar .nav-item:hover .dropdown-menu {
+    display: block !important;
+}
+/* Make navbar fully visible on mobile without collapse */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        display: block !important; /* Always show */
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        background-color: transparent !important;
+        z-index: auto !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    .navbar-toggler {
+        display: none !important; /* Hide toggler */
+    }
+    .navbar-backdrop {
+        display: none !important;
+    }
+    .mobile-menu-close {
+        display: none !important;
+    }
+    /* Adjust nav items for mobile */
+    .navbar-nav {
+        flex-direction: row !important; /* Keep horizontal */
+        align-items: center !important;
+        flex-wrap: wrap !important;
+    }
+    .nav-item {
+        width: auto !important;
+        margin-bottom: 0 !important;
+    }
+    .nav-link {
+        padding: 0.5rem 1rem !important;
+        border-radius: 0 !important;
+        width: auto !important;
+        text-align: center !important;
+    }
+    .dropdown-menu {
+        position: absolute !important;
+        float: none !important;
+        width: auto !important;
+        margin-top: 0 !important;
+        border: 1px solid #dee2e6 !important;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+        background-color: #fff !important;
+    }
+    .dropdown-item {
+        padding: 0.5rem 1rem !important;
+        width: auto !important;
+    }
+    /* Mega menu adjustments for mobile */
+    .custom-mega-wrapper {
+        position: absolute !important;
+        left: 0 !important;
+        transform: none !important;
+        width: 100vw !important;
+        max-width: none !important;
+        min-width: auto !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    .custom-mega-column {
+        width: 100% !important; /* Full width for better sub-menu organization */
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        margin-bottom: 15px !important;
     }
 }
 #topbar1{
@@ -139,36 +207,15 @@ small, .small {
     color: black;
 }
 </style>
-
-
-<!-- Google Fonts & Icon CSS -->
-{{-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-<link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
-<link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
-
-<!-- Navbar ngrok -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
 <link href="/lib/animate/animate.min.css" rel="stylesheet">
 <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/style.css" rel="stylesheet">
-
-
-
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -177,8 +224,6 @@ small, .small {
         </div>
     </div>
     <!-- Spinner End -->
-
-
     <!-- Topbar Start -->
     <div class="container-fluid px-5 d-none border-bottom d-lg-block" id="topbar1">
         <div class="row gx-0 align-items-center">
@@ -187,14 +232,12 @@ small, .small {
                     <a href="{{ route('help') }}" class="text-muted me-2"> Help</a><small> / </small>
                     <a href="{{ route('support') }}" class="text-muted mx-2"> Support</a><small> / </small>
                     <a href="{{url('contact')}}" class="text-muted ms-2"> Contact</a>
-
                 </div>
             </div>
             <div class="col-lg-4 text-center d-flex align-items-center justify-content-center">
                 <small class="text-dark">Call Us:</small>
                 <a href="#" class="text-muted">(+012) 1234 567890</a>
             </div>
-
             <div class="col-lg-4 text-center text-lg-end">
                 <div class="d-inline-flex align-items-center" style="height: 45px;">
                     <div class="dropdown">
@@ -213,8 +256,6 @@ small, .small {
                             <a href="#" class="dropdown-item"> Arabic</a>
                         </div>
                     </div> --}}
-
-
            <div class="dropdown">
     <a href="#" class="dropdown-toggle text-muted mx-2" data-bs-toggle="dropdown">
         <small>{{ strtoupper(app()->getLocale()) }}</small>
@@ -224,8 +265,6 @@ small, .small {
         <a href="{{ route('change.lang', ['lang' => 'ar']) }}" class="dropdown-item">Arabic</a>
     </div>
 </div>
-
-
                     <div class="dropdown">
                         <a href="#" class="dropdown-toggle text-muted ms-2" data-bs-toggle="dropdown"><small><i
                                     class="fa fa-home me-2"></i> My Dashboard</small></a>
@@ -266,30 +305,22 @@ small, .small {
         <div class="d-flex border rounded-pill">
             <input class="form-control border-0 rounded-pill w-100 py-3"
                    type="text" name="q" placeholder="Search Looking For?">
-
             <select class="form-select text-dark border-0 border-start rounded-0 p-3" name="category" style="width: 200px;">
                 <option value="">All Category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
-
             <button type="submit" class="btn btn-primary rounded-pill py-3 px-5" style="border: 0;">
                 <i class="fas fa-search"></i>
             </button>
         </div>
     </div>
 </form>
-
             <div class="col-md-4 col-lg-3 text-center text-lg-end">
                 <div class="d-inline-flex align-items-center">
                     <a href="#" class="text-muted d-flex align-items-center justify-content-center me-3"><span
                             class="rounded-circle btn-md-square border"><i class="fas fa-random"></i></i></a>
-
-
-
-
-
 <div class="dropdown me-3 position-relative">
     <a class="d-flex align-items-center justify-content-center text-dark text-decoration-none position-relative"
        href="#" id="favDropdown" data-bs-toggle="dropdown">
@@ -308,10 +339,8 @@ small, .small {
         </span>
         <span class="fw-semibold ms-2"></span>
     </a>
-
     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 p-2"
         style="width: 378px; max-height: 350px; overflow-y: auto; border-radius: 16px;">
-
         @if($favorites instanceof \Illuminate\Support\Collection && $favorites->isEmpty())
             <li class="text-center py-4">
                 <i class="fas fa-heart-broken fa-3x text-muted mb-2"></i>
@@ -340,7 +369,6 @@ small, .small {
                     </li>
                 @endif
             @endforeach
-
             <li><hr class="my-2"></li>
             <li class="dropdown-item text-center">
                 <a href="{{ route('favorites.index') }}" class="btn btn-sm btn-primary px-3">
@@ -350,9 +378,7 @@ small, .small {
         @endif
     </ul>
 </div>
-
 {{-- في الـ navbar، غير قسم السلة إلى هذا: --}}
-
 <div class="dropdown me-3 position-relative">
     <a class="d-flex align-items-center justify-content-center text-dark text-decoration-none position-relative"
        href="#" id="cartDropdown" data-bs-toggle="dropdown">
@@ -371,10 +397,8 @@ small, .small {
         </span>
         <span class="fw-semibold ms-2">${{ number_format($total, 2) }}</span>
     </a>
-
     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 p-2"
         style="width: 378px; max-height: 350px; overflow-y: auto; border-radius: 16px;">
-
         @if($cartItems->isEmpty())
             <li class="text-center py-4">
                 <i class="fas fa-shopping-basket fa-3x text-muted mb-2"></i>
@@ -392,7 +416,6 @@ small, .small {
     alt="{{ $item->product->name ?? $item->name ?? 'Product image' }}"
     class="rounded shadow-sm me-2"
     style="width: 50px; height: 50px; object-fit: cover;">
-
                     <div class="flex-grow-1">
                         <div class="fw-semibold small text-dark mb-1">{{ Str::limit($item->product->name, 30) }}</div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -407,7 +430,6 @@ small, .small {
                                     </form>
                 </li>
             @endforeach
-
             <li><hr class="my-2"></li>
             <li class="dropdown-item text-center">
                 <h6 class="fw-bold mb-1 text-primary">الإجمالي: ${{ number_format($total, 2) }}</h6>
@@ -423,9 +445,7 @@ small, .small {
             </div>
         </div>
     </div>
-
     <!-- Topbar End -->
-
     <!-- Navbar & Hero Start -->
     <div class="container-fluid nav-bar p-0">
         <div class="row gx-0 bg-primary px-5 align-items-center">
@@ -489,14 +509,11 @@ small, .small {
                             <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
                             <a href="{{ route('shop') }}" class="nav-item nav-link">Shop</a>
                             {{-- <a href="{{ route('signal') }}" class="nav-item nav-link">Single Page</a> --}}
-
 {{-- @props(['title']) --}}
-
 <div class="nav-item dropdown position-static">
     <a href="#" class="nav-link dropdown-toggle" id="megaMenuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Category
     </a>
-
     <!-- Dropdown كامل العرض مع ستايل محسن - أسماء كلاسات جديدة -->
     <div class="dropdown-menu w-100 shadow border-0 p-4 custom-mega-wrapper" aria-labelledby="megaMenuDropdown">
         <div class="custom-mega-container">
@@ -523,7 +540,6 @@ small, .small {
         </div>
     </div>
 </div>
-
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">products</a>
                                 <div class="dropdown-menu m-0">
@@ -532,9 +548,7 @@ small, .small {
                                     <a href="{{ route('checkout') }}" class="dropdown-item">Cheackout</a>
                                     <a href="{{route('error')}}" class="dropdown-item">404 Page</a>
                                 </div>
-
                             </div>
-
                             {{-- <a href="{{ url('contact') }}" class="nav-item nav-link me-2">Contact</a> --}}
                             <div class="nav-item dropdown d-block d-lg-none mb-3">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All Category</a>
@@ -582,27 +596,22 @@ small, .small {
         </div>
     </div>
     {{ $slot }}
-
 <!-- Scripts ngrok -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="/lib/wow/wow.min.js"></script>
 <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
 <script src="/js/main.js"></script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const cartDropdown = document.getElementById('cartDropdown');
     const cartBadge = document.getElementById('cartBadge');
-
     if (cartDropdown && cartBadge) {
         // 🟢 عند فتح السلة (يختفي الرقم)
         cartDropdown.addEventListener('show.bs.dropdown', function() {
             cartBadge.style.opacity = '0';
             cartBadge.style.transition = 'opacity 0.3s ease';
         });
-
         // 🟢 عند إغلاق السلة (يظهر الرقم من جديد)
         cartDropdown.addEventListener('hide.bs.dropdown', function() {
             setTimeout(() => {
@@ -610,13 +619,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 200);
         });
     }
+
+
 });
-
-
 .then(data => {
     const icon = this.querySelector('i');
     icon.classList.toggle('text-danger', data.favorite);
-
     // تحديث رقم العدّاد في الهيدر مباشرة
     const favBadge = document.querySelector('#favDropdown .badge');
     if (favBadge) {
@@ -628,5 +636,4 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('#favDropdown .rounded-circle').appendChild(badge);
     }
 })
-
 </script>

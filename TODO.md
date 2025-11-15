@@ -1,0 +1,5 @@
+- [x] Make navbar fully visible on mobile by preventing collapse (hide toggler, set collapse to static display)
+- [x] Adjust mega menu columns to full width on small screens for better sub-menu organization
+- [ ] Show left "All Categories" section on mobile if needed
+- [x] Remove unused backdrop and close button from HTML
+- [x] Test and verify the changes work on small screens (server running on http://127.0.0.1:8000)
